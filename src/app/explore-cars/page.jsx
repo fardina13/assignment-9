@@ -1,6 +1,5 @@
 import CarCard from "@/components/CarCard";
 
-
 const ExploreCarsPage = async() => {
     const  res = await fetch('http://localhost:5000/car');
     const cars = await res.json();
@@ -15,7 +14,7 @@ const ExploreCarsPage = async() => {
             >
                 <div className="absolute inset-0 bg-black/60"></div>
 
-                <h1 className="relative z-10 text-5xl font-bold text-white">
+                <h1 className="animate-slide-up delay-5 relative z-10 text-5xl font-bold text-white">
                     Explore Cars
                 </h1>
             </section>
