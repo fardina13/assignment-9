@@ -15,8 +15,18 @@ const AddCar = ({ isPending }) => {
     const onSubmit= async(e)=>{
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
-        const destination = Object.fromEntries(formData.entries());
-        console.log(destination);
+        const car = Object.fromEntries(formData.entries());
+        console.log(car);
+
+        const res = await fetch('http://localhost:5000/car',{
+            method:'POST',
+            headers:{
+                'content-type':'application/json'
+            },
+            body: JSON.stringify(car)
+        })
+        const data = await res.json();
+        console.log(data);
     }
     return (
         <form onSubmit={onSubmit}
