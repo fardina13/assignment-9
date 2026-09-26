@@ -12,7 +12,15 @@
     transform: translateY(0);
   }
 }
+.car-page-title {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
 
+.car-page-subtitle {
+  color: rgba(255, 255, 255, 0.75) !important;
+  opacity: 1 !important;
+}
 .animate-slide-up {
   opacity: 0;
   animation: slideUp 0.7s ease-out forwards;
@@ -35,5 +43,12 @@
 }
 
 .delay-5 {
-  animation-delay: 1s;
+  animation-delay: 1.2s;
 }
+.delay-6 {
+  animation-delay: 1.4s;
+}
+.delay-7 {
+  animation-delay: 1.6s;
+}
+

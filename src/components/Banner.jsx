@@ -10,13 +10,13 @@ const cars = [
     price: "$80",
   },
   {
-    image: "/assets/car11.jpg",
+    image: "/assets/car13.jpg",
     name: "BMW X5",
     price: "$120",
   },
   {
-    image: "/assets/car9.jpg",
-    name: "Mercedes Benz",
+    image: "/assets/car15.jpg",
+    name: "Midnight BMW M-Series",
     price: "$150",
   },
 ];
@@ -69,27 +69,17 @@ const HeroBanner = () => {
 
           {/* Main heading */}
           <h1 className="animate-slide-up delay-2 text-6xl font-bold leading-none md:text-7xl lg:text-8xl">
-            Rental Car
+            Drive Beyond Ordinary
           </h1>
 
-          {/* Car name & price */}
-          <div className="animate-slide-up delay-3 mt-7 flex items-center gap-5 text-lg">
-            <span>{cars[current].name}</span>
-
-            <span className="text-3xl font-bold text-[#C41E3A]">
-              {cars[current].price}
-            </span>
-
-            <span className="text-sm uppercase">
-              / Day
-            </span>
-          </div>
-
+          {/* Sub heading */}
+          <p className="animate-slide-up delay-3 text-white text-lg mt-4">Premium cars, effortless booking, and a journey made just for you.</p>
+           
           {/* Buttons */}
           <div className="mt-8 flex flex-wrap gap-4">
 
             <button className="animate-slide-up delay-4 rounded-full bg-[#C41E3A] px-8 py-4 font-medium text-white transition hover:bg-[#a91932]">
-              View Details ↗
+              Explore Cars ↗
             </button>
 
             <button className="animate-slide-up delay-5 rounded-full border border-white/70 px-8 py-4 font-medium text-white transition hover:bg-white hover:text-black">
