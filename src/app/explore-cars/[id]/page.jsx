@@ -1,4 +1,6 @@
 import CarGallery from "@/components/CarGallery";
+import { EditModal } from "@/components/EditModal";
+import { Button } from "@heroui/react";
 
 
 const CarDetailsPage = async({params}) => {
@@ -6,11 +8,12 @@ const CarDetailsPage = async({params}) => {
     // console.log(id);
     const res = await fetch(`http://localhost:5000/car/${id}`);
     const car = await res.json();
-    console.log(car);
+    // console.log(car);
     const images = [
         car.imageUrl,
         ...(car.galleryImages || []),
     ];
+    
     return (
         <div className="bg-white">
 
@@ -151,9 +154,18 @@ const CarDetailsPage = async({params}) => {
                                     </span>
                                 </div>
 
-                                <button className="mt-5 w-full rounded-full bg-[#C41E3A] py-4 font-semibold text-white transition hover:bg-[#a91831]">
-                                    Rent Now
-                                </button>
+                                <div className="mt-8 flex justify-center">
+    <div className="mt-8 flex items-center justify-center ">
+    <EditModal car={car}/>
+
+    <span className="text-sm font-semibold text-[#001C30]">
+        &
+    </span>
+    <Button className={'rounded-l-none rounded-r-full bg-[#C41E3A] px-5 py-3 text-sm text-white'}>Rent Now</Button>
+
+    
+</div>
+</div>
 
                             </div>
                         </div>
