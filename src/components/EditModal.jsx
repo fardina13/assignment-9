@@ -144,9 +144,7 @@ Electric
   <FieldError />
 </TextField>
         <div className="flex justify-end">
-            <Button slot="close" variant="tertiary">
-                Cancel
-              </Button>
+            
               <Button slot="close" type="submit" className={'rounded-xl bg-[#C41E3A] text-white'}>Save Changes</Button>
             </div>         
                         </form>

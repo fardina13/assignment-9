@@ -1,8 +1,11 @@
 "use client";
 
+import {authClient} from "@/lib/auth-client";
+import { Avatar } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+// import { useSession } from "@/lib/auth-client"; 
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -18,6 +21,13 @@ const Navbar = () => {
             window.removeEventListener("scroll", handleScroll);
         };
     }, []);
+    const { data: session,
+     } =authClient.useSession();
+    // console.log(session);
+    const user = session?.user;
+    console.log(user);
+
+
 
     return (
         <div
@@ -46,7 +56,7 @@ const Navbar = () => {
 
                 {/* Navigation */}
                 <ul
-                    className={`flex gap-12 font-regular transition-colors duration-300 ${
+                    className={`flex gap-12 font-regular items-center transition-colors duration-300 ${
                         scrolled ? "text-black" : "text-white"
                     }`}
                 >
@@ -55,8 +65,24 @@ const Navbar = () => {
                     <li><Link href="/add-car" className="transition-colors duration-200 hover:text-[#C41E3A]"> Add Car</Link></li>
                     <li><Link href="/my-bookings" className="transition-colors duration-200 hover:text-[#C41E3A]"> My Bookings</Link></li>
                     <li><Link href="/profile" className="transition-colors duration-200 hover:text-[#C41E3A]">Profile</Link></li>
-                    <li><Link href="/login" className="transition-colors duration-200 hover:text-[#C41E3A]">Login</Link></li>
-                    <li><Link href="/register" className="transition-colors duration-200 hover:text-[#C41E3A]">Register</Link></li>
+                    
+                    {user ? 
+                     <>
+                      <li>
+                        <Avatar>
+                        <Avatar.Image alt="John Doe" src={user?.image} />
+                        <Avatar.Fallback>{user.name.charAt(0)}</Avatar.Fallback>
+                        </Avatar>
+                      </li>
+                      <li>
+                        <Link href="/logout" className="transition-colors duration-200 hover:text-[#C41E3A]">Logout</Link>
+                      </li>
+                     </>
+                    :
+                     <>
+                      <li><Link href="/login" className="transition-colors duration-200 hover:text-[#C41E3A]">Login</Link></li>
+                      <li><Link href="/register" className="transition-colors duration-200 hover:text-[#C41E3A]">Register</Link></li>
+                     </>}
                 </ul>
 
             </nav>
