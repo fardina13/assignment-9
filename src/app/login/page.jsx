@@ -1,7 +1,7 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
-import { Button, Description, FieldError, Input, Label, TextField } from "@heroui/react";
+import { Button, Description, FieldError, Input, Label, Separator, TextField } from "@heroui/react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -26,6 +26,10 @@ const LoginPage = () => {
           alert("Error")
         }
     };
+    const handleGoogleRegister = async()=>{
+        await authClient.signIn.social({
+    provider: "google",
+  });
     return (
         <div
             className="relative min-h-screen bg-cover bg-center"
@@ -111,6 +115,12 @@ const LoginPage = () => {
                 </Button>
 
             </form>
+        <div className="flex justify-center items-center gap-3">
+                    <Separator>
+                        <div className="whitespace-nowrap">Or</div>
+                    </Separator>
+                    <Button onClick={handleGoogleRegister} variant="outline"><FcGoogle />Register with google</Button>
+                </div>
     </div>
 
 </div>
@@ -118,5 +128,5 @@ const LoginPage = () => {
         </div>
     );
 };
-
+}
 export default LoginPage;

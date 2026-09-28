@@ -1,7 +1,8 @@
 "use client";
 
+import { FcGoogle } from "react-icons/fc";
 import { authClient } from "@/lib/auth-client";
-import { Button, Description, FieldError, Input, Label, TextField } from "@heroui/react";
+import { Button, Description, FieldError, Input, Label, Separator, TextField } from "@heroui/react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -27,6 +28,11 @@ const RegisterPage = () => {
           alert("Error")
         }
     };
+    const handleGoogleRegister = async()=>{
+        await authClient.signIn.social({
+    provider: "google",
+  });
+    }
     return (
         <div
             className="relative min-h-screen bg-cover bg-center"
@@ -135,7 +141,16 @@ const RegisterPage = () => {
                 </Button>
 
             </form>
+        <div className=" text-center gap-3 mt-3">
+            <Separator>
+                <div className="whitespace-nowrap text-white">
+                    Or
+                </div>
+            </Separator>
+            <Button onClick={handleGoogleRegister} variant="light" className={'text-muted mt-2'}><FcGoogle />Sign up with Google</Button>
+        </div>
     </div>
+    
 
 </div>
 </div>

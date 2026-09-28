@@ -1,7 +1,7 @@
 "use client";
 
 import {authClient} from "@/lib/auth-client";
-import { Avatar } from "@heroui/react";
+import { Avatar, Button } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -25,7 +25,11 @@ const Navbar = () => {
      } =authClient.useSession();
     // console.log(session);
     const user = session?.user;
-    console.log(user);
+    // console.log(user);
+
+    const handleLogOut= async() =>{
+        await authClient.signOut();
+    }
 
 
 
@@ -69,15 +73,19 @@ const Navbar = () => {
                     {user ? 
                      <>
                       <li>
+                        <Link onClick={(e) => {
+    e.preventDefault();
+    handleLogOut();
+  }} 
+  href="#"  className='transition-colors duration-200 hover:text-[#C41E3A]'>Logout</Link>
+                      </li>
+                      <li>
                         <Avatar>
-                        <Avatar.Image alt="John Doe" src={user?.image} />
+                        <Avatar.Image referrerPolicy="no-referrer" alt="John Doe" src={user?.image} />
                         <Avatar.Fallback>{user.name.charAt(0)}</Avatar.Fallback>
                         </Avatar>
                       </li>
-                      <li>
-                        <Link href="/logout" className="transition-colors duration-200 hover:text-[#C41E3A]">Logout</Link>
-                      </li>
-                     </>
+                    </>
                     :
                      <>
                       <li><Link href="/login" className="transition-colors duration-200 hover:text-[#C41E3A]">Login</Link></li>
