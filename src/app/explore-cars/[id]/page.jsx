@@ -1,13 +1,31 @@
 import BookingCard from "@/components/BookingCard";
 import CarGallery from "@/components/CarGallery";
 import { EditModal } from "@/components/EditModal";
+import { auth } from "@/lib/auth";
 import { Button } from "@heroui/react";
+import { headers } from "next/headers";
 
 
 const CarDetailsPage = async({params}) => {
     const {id} = await params;
     // console.log(id);
-    const res = await fetch(`http://localhost:5000/car/${id}`);
+    // const token = await auth.api.getToken({
+    //     headers: headers()
+    // })
+    // console.log(token);
+
+    const requestHeaders = await headers();
+
+const {token} = await auth.api.getToken({
+    headers: requestHeaders
+});
+
+console.log(token);
+    const res = await fetch(`http://localhost:5000/car/${id}`,{
+        headers:{
+            authorization: `Bearer ${token}`
+        }
+    });
     const car = await res.json();
     // console.log(car);
     const images = [
