@@ -4,6 +4,7 @@ import { authClient } from "@/lib/auth-client";
 import { Button, Description, FieldError, Input, Label, Separator, TextField } from "@heroui/react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { FcGoogle } from "react-icons/fc";
 
 const LoginPage = () => {
     const onSubmit = async(e)=>{
@@ -15,7 +16,7 @@ const LoginPage = () => {
         const {data, error} = await authClient.signIn.email({
           email: user.email,
           password: user.password,
-          callbackURL: "/",
+        //   callbackURL: "/",
         });
         console.log({data, error});
         if(data){
@@ -30,6 +31,7 @@ const LoginPage = () => {
         await authClient.signIn.social({
     provider: "google",
   });
+};
     return (
         <div
             className="relative min-h-screen bg-cover bg-center"
@@ -115,11 +117,11 @@ const LoginPage = () => {
                 </Button>
 
             </form>
-        <div className="flex justify-center items-center gap-3">
+        <div className="text-center mt-3 gap-3">
                     <Separator>
                         <div className="whitespace-nowrap">Or</div>
                     </Separator>
-                    <Button onClick={handleGoogleRegister} variant="outline"><FcGoogle />Register with google</Button>
+                    <Button onClick={handleGoogleRegister} className={'text-muted'} variant="light"><FcGoogle />Login with Google</Button>
                 </div>
     </div>
 
@@ -128,5 +130,5 @@ const LoginPage = () => {
         </div>
     );
 };
-}
+
 export default LoginPage;

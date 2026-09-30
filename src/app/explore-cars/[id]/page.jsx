@@ -1,3 +1,4 @@
+import BookingCard from "@/components/BookingCard";
 import CarGallery from "@/components/CarGallery";
 import { EditModal } from "@/components/EditModal";
 import { Button } from "@heroui/react";
@@ -103,73 +104,7 @@ const CarDetailsPage = async({params}) => {
 
 
                     {/* Right Booking Card */}
-                    <div className="relative z-20 -mt-45">
-                        <div className="overflow-hidden rounded-2xl bg-gray-100 shadow-lg">
-
-                            <div className="bg-[#C41E3A] px-7 py-7 text-center">
-                                <p className="text-3xl font-bold text-white">
-                                    ${car.price}
-                                </p>
-
-                                <span className="text-sm text-white/80">
-                                    / rent per day
-                                </span>
-                            </div>
-
-                            <div className="space-y-5 p-7">
-
-                                
-
-                                <div className="flex justify-between">
-                                    <span className="text-gray-500">
-                                         Brand
-                                    </span>
-                                    <span className="font-medium">
-                                        {car.brand}
-                                    </span>
-                                </div>
-
-                                <div className="flex justify-between">
-                                    <span className="text-gray-500">
-                                         Category
-                                    </span>
-                                    <span className="font-medium">
-                                        {car.category}
-                                    </span>
-                                </div>
-                                <div className="flex justify-between">
-                                    <span className="text-gray-500">
-                                         Fuel Type
-                                    </span>
-                                    <span className="font-medium">
-                                        {car.fuelType}
-                                    </span>
-                                </div>
-                                <div className="flex justify-between">
-                                    <span className="text-gray-500">
-                                         Seats
-                                    </span>
-                                    <span className="font-medium">
-                                        {car.seats}
-                                    </span>
-                                </div>
-
-                                <div className="mt-8 flex justify-center">
-    <div className="mt-8 flex items-center justify-center ">
-    <EditModal car={car}/>
-
-    <span className="text-sm font-semibold text-[#001C30]">
-        &
-    </span>
-    <Button className={'rounded-l-none rounded-r-full bg-[#C41E3A] px-5 py-3 text-sm text-white'}>Rent Now</Button>
-
-    
-</div>
-</div>
-
-                            </div>
-                        </div>
-                    </div>
+                    <BookingCard car={car}/>
 
                 </div>
             </section>
