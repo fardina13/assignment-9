@@ -28,10 +28,13 @@ const BookingCard = ({car})=>{
 
         rentalDate: new Date(rentalDate),
     };
+    const {data:tokenData} = await authClient.token();
+    // console.log(tokenData);
     const res = await fetch("http://localhost:5000/booking", {
     method: "POST",
     headers: {
         "content-type": "application/json",
+        authorization:`Bearer ${tokenData?.token}`
     },
     body: JSON.stringify(bookingData),
 });

@@ -3,6 +3,7 @@
 import {AlertDialog, Button} from "@heroui/react";
 
 export function BookingCancelAlert({ bookingId, onDelete }) {
+  
   return (
     <AlertDialog>
       <Button variant="bordered" className={'self-start rounded-lg border border-red-200 px-4 py-2 text-sm font-semibold text-[#C41E3A] transition duration-200 hover:bg-[#C41E3A] hover:text-white md:self-center'} > Cancel </Button>
