@@ -13,7 +13,7 @@ export function BookingCancelAlert({ bookingId, onDelete }) {
             <AlertDialog.CloseTrigger />
             <AlertDialog.Header>
               <AlertDialog.Icon status="danger" />
-              <AlertDialog.Heading>Delete project permanently?</AlertDialog.Heading>
+              <AlertDialog.Heading>Delete booking permanently?</AlertDialog.Heading>
             </AlertDialog.Header>
             <AlertDialog.Body>
             </AlertDialog.Body>
@@ -21,7 +21,7 @@ export function BookingCancelAlert({ bookingId, onDelete }) {
               <Button slot="close" variant="tertiary">
                 Cancel
               </Button>
-              <Button slot="close" className="bg-[#C41E3A] text-white hover:bg-[#a81830]" onPress={() => onDelete(bookingId)}>
+              <Button slot="close"  onPress={() => onDelete(bookingId)} className="bg-[#C41E3A] text-white hover:bg-[#a81830]" onPress={() => onDelete(bookingId)}>
                 Cancel Booking
               </Button>
             </AlertDialog.Footer>
