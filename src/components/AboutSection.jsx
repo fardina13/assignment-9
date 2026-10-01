@@ -55,7 +55,7 @@ const AboutSection = () => {
                             alt="DriveFleet car rental"
                             width={700}
                             height={800}
-                            className="h-[430px] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                            className="h-[430px] w-full object-cover transition-transform duration-2000 ease-out hover:scale-110"
                         />
                     </div>
                 </div>

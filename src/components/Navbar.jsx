@@ -5,7 +5,6 @@ import { Avatar, Button } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-// import { useSession } from "@/lib/auth-client"; 
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -74,10 +73,10 @@ const Navbar = () => {
                      <>
                       <li>
                         <Link onClick={(e) => {
-    e.preventDefault();
-    handleLogOut();
-  }} 
-  href="#"  className='transition-colors duration-200 hover:text-[#C41E3A]'>Logout</Link>
+                         e.preventDefault();
+                         handleLogOut();
+                         }} 
+                        href="#"  className='transition-colors duration-200 hover:text-[#C41E3A]'>Logout</Link>
                       </li>
                       <li>
                         <Avatar>

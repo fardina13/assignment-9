@@ -6,7 +6,7 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: "https",
-                hostname: "webredox.net",
+                hostname: "**",
             },
         ],
     },

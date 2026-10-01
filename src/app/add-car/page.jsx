@@ -44,14 +44,9 @@ const AddCar = ({ isPending }) => {
             <div className="absolute inset-0 bg-black/55" />
             
             <div className="relative z-10 mb-4 text-center">
-    <h2 className="text-5xl font-semibold text-white">
-        Add Car
-    </h2>
-
-    <p className="mt-1 text-sm text-white/70">
-        Make changes to the car details below
-    </p>
-</div>
+              <h2 className="text-5xl font-semibold text-white">Add Car</h2>
+              <p className="mt-1 text-sm text-white/70">Make changes to the car details below</p>
+            </div>
 
             {/* Form Card */}
             <div className="relative z-10 mx-auto w-full max-w-xl rounded-2xl border border-white/30 bg-white/20 p-8 shadow-2xl backdrop-blur-md">
