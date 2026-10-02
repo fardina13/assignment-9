@@ -9,7 +9,7 @@ export function EditModal({car}) {
         const updatedCar = await Object.fromEntries(formData.entries());
         console.log(car);
 
-        const res = await fetch(`http://localhost:5000/car/${car._id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/car/${car._id}`, {
         method: "PATCH",
         headers: {
             "content-type": "application/json",

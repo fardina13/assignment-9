@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Featured = async () => {
-    const res = await fetch("http://localhost:5000/featured");
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/featured`);
     const cars = await res.json();
 
     return (

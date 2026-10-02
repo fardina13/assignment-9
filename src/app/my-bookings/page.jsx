@@ -4,11 +4,22 @@ import { authClient } from "@/lib/auth-client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { BookingCancelAlert } from "@/components/BookingCancelAlert";
+import { useRouter } from "next/navigation";
+
 
 const MyBookingsPage = () => {
   const { data: session, isPending } = authClient.useSession();
   const [bookings, setBookings] = useState([]);
   const user = session?.user;
+
+    const router = useRouter();
+
+  useEffect(() => {
+    if (!isPending && !session) {
+      router.push("/login");
+    }
+  }, [session, isPending, router]);
+
 
   useEffect(() => {
     if (!user?.id) return;
@@ -18,7 +29,7 @@ const MyBookingsPage = () => {
         const tokenRes = await authClient.token();
         const token = tokenRes?.data?.token || ""; 
 
-        const res = await fetch(`http://localhost:5000/booking?userId=${user.id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/booking?userId=${user.id}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -42,7 +53,7 @@ const MyBookingsPage = () => {
       const tokenRes = await authClient.token();
       const token = tokenRes?.data?.token || "";
 
-      const res = await fetch(`http://localhost:5000/booking/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/booking/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -61,7 +72,7 @@ const MyBookingsPage = () => {
     }
   };
 
-  if (isPending) {
+  if (isPending || !session) {
     return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
   }
 

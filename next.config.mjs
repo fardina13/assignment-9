@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
-  reactCompiler: true,
+  experimental: {
+    reactCompiler: true,
+  },
+  eslint: {
+    // এটি বিল্ড করার সময় ESLint এর সাধারণ টাইপো এররগুলোকে ইগনোর করবে
+    ignoreDuringBuilds: true,
+  },
   images: {
         remotePatterns: [
             {

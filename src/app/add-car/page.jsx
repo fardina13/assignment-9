@@ -10,6 +10,10 @@ import {
     TextArea,
     TextField,
 } from "@heroui/react";
+import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
+import { useEffect } from "react";
+
 
 const AddCar = ({ isPending }) => {
     const onSubmit= async(e)=>{
@@ -18,7 +22,7 @@ const AddCar = ({ isPending }) => {
         const car = Object.fromEntries(formData.entries());
         console.log(car);
 
-        const res = await fetch('http://localhost:5000/car',{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/car`,{
             method:'POST',
             headers:{
                 'content-type':'application/json'
@@ -28,6 +32,19 @@ const AddCar = ({ isPending }) => {
         const data = await res.json();
         console.log(data);
     }
+      const { data: session, isPending: authPending } = authClient.useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!authPending && !session) {
+      router.push("/login");
+    }
+  }, [session, authPending, router]);
+
+  if (authPending || !session) {
+    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  }
+
     return (
         <form onSubmit={onSubmit}
             className="relative min-h-screen overflow-hidden px-4 py-28"

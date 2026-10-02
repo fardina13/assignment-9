@@ -1,7 +1,7 @@
 "use client";
 
-import {authClient} from "@/lib/auth-client";
-import { Avatar, Button } from "@heroui/react";
+import { authClient } from "@/lib/auth-client";
+import { Avatar } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -20,28 +20,21 @@ const Navbar = () => {
             window.removeEventListener("scroll", handleScroll);
         };
     }, []);
-    const { data: session,
-     } =authClient.useSession();
-    // console.log(session);
+
+    const { data: session, isPending } = authClient.useSession();
     const user = session?.user;
-    // console.log(user);
 
-    const handleLogOut= async() =>{
+    const handleLogOut = async () => {
         await authClient.signOut();
-    }
-
-
+    };
 
     return (
         <div
-            className={`fixed top-0 left-0 z-50 w-full  transition-all duration-300 ${
-                scrolled
-                    ? "bg-white shadow-md"
-                    : "bg-transparent"
+            className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 ${
+                scrolled ? "bg-white shadow-md" : "bg-transparent"
             }`}
         >
             <nav className="flex items-center justify-between max-w-7xl mx-auto px-4">
-
                 {/* Logo */}
                 <div>
                     <Image
@@ -67,34 +60,49 @@ const Navbar = () => {
                     <li><Link href="/explore-cars" className="transition-colors duration-200 hover:text-[#C41E3A]">Explore Cars</Link></li>
                     <li><Link href="/add-car" className="transition-colors duration-200 hover:text-[#C41E3A]"> Add Car</Link></li>
                     <li><Link href="/my-bookings" className="transition-colors duration-200 hover:text-[#C41E3A]"> My Bookings</Link></li>
-                    <li><Link href="/profile" className="transition-colors duration-200 hover:text-[#C41E3A]">Profile</Link></li>
                     
-                    {user ? 
-                     <>
-                      <li>
-                        <Link onClick={(e) => {
-                         e.preventDefault();
-                         handleLogOut();
-                         }} 
-                        href="#"  className='transition-colors duration-200 hover:text-[#C41E3A]'>Logout</Link>
-                      </li>
-                      <li>
-                        <Avatar>
-                        <Avatar.Image referrerPolicy="no-referrer" alt="John Doe" src={user?.image} />
-                        <Avatar.Fallback>{user.name.charAt(0)}</Avatar.Fallback>
-                        </Avatar>
-                      </li>
-                    </>
-                    :
-                     <>
-                      <li><Link href="/login" className="transition-colors duration-200 hover:text-[#C41E3A]">Login</Link></li>
-                      <li><Link href="/register" className="transition-colors duration-200 hover:text-[#C41E3A]">Register</Link></li>
-                     </>}
+                    {!isPending && (
+                        user ? (
+                            <>
+                                <li>
+                                    <Link 
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            handleLogOut();
+                                        }} 
+                                        href="#" 
+                                        className='transition-colors duration-200 hover:text-[#C41E3A]'
+                                    >
+                                        Logout
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Avatar className="w-8 h-8 text-black font-semibold" showFallback>
+                                        {user?.image ? (
+                                            <Avatar.Image 
+                                                referrerPolicy="no-referrer" 
+                                                alt={user?.name || "User"} 
+                                                src={user.image} 
+                                            />
+                                        ) : null}
+                                        <Avatar.Fallback>
+                                            {user?.name ? user.name.charAt(0).toUpperCase() : "U"}
+                                        </Avatar.Fallback>
+                                    </Avatar>
+                                </li>
+                            </>
+                        ) : (
+                            <>
+                                <li><Link href="/login" className="transition-colors duration-200 hover:text-[#C41E3A]">Login</Link></li>
+                                <li><Link href="/register" className="transition-colors duration-200 hover:text-[#C41E3A]">Register</Link></li>
+                            </>
+                        )
+                    )}
                 </ul>
-
             </nav>
         </div>
     );
 };
 
 export default Navbar;
+

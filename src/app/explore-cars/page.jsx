@@ -13,7 +13,7 @@ const ExploreCarsPage = () => {
 
     // Get categories
     useEffect(() => {
-        fetch("http://localhost:5000/car")
+        fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/car`)
             .then((res) => res.json())
             .then((data) => {
                 setCategories([...new Set(data.map((car) => car.category))]);
@@ -27,7 +27,7 @@ const ExploreCarsPage = () => {
         if (search) params.set("search", search);
         if (category) params.set("category", category);
 
-        fetch(`http://localhost:5000/car?${params.toString()}`)
+        fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/car?${params.toString()}`)
             .then((res) => res.json())
             .then((data) => {
                 setCars(data);

@@ -2,11 +2,19 @@ import BookingCard from "@/components/BookingCard";
 import CarGallery from "@/components/CarGallery";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
+
 
 const CarDetailsPage = async ({ params }) => {
   const { id } = await params;
   
-  const requestHeaders = await headers();
+    const requestHeaders = await headers();
+  const session = await auth.api.getSession({ headers: requestHeaders });
+  if (!session) {
+    redirect("/login");
+  }
+
+
 
   let token = "";
   try {
@@ -18,7 +26,7 @@ const CarDetailsPage = async ({ params }) => {
     console.error("Token Fetch Error:", error);
   }
 
-  const res = await fetch(`http://localhost:5000/car/${id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/car/${id}`, {
     headers: {
       authorization: token ? `Bearer ${token}` : "",
     },
